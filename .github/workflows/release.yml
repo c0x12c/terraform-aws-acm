@@ -44,11 +44,18 @@ jobs:
     # Skip running release workflow on forks
     if: github.repository_owner == 'c0x12c' && needs.verify-changelog.outputs.is_releasable == 'true'
     steps:
+      - name: Create GitHub App Token
+        uses: actions/create-github-app-token@v2
+        id: github-app-token
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          # To fetch all refs
-          fetch-depth: 0
+          token: ${{ steps.github-app-token.outputs.token }}
+          ref: ${{ github.head_ref }}
 
 
       # Extract the first (latest) version mentioned in the changelog
@@ -76,10 +83,10 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}             # This token is provided by Actions
+          GITHUB_TOKEN: ${{ steps.github-app-token.outputs.token }}
         with:
-          tag_name: "v${{ env.VERSION }}"                       # This should be v0.0.0
-          release_name: "v${{ env.VERSION }}"                   # This should be v0.0.0
+          tag_name: "v${{ env.VERSION }}"
+          release_name: "v${{ env.VERSION }}"
           body: "${{ steps.changelog.outputs.changelog }}"
           draft: false
           prerelease: false
