@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.63]() (2025-06-18)
+
+### Changes
+
+* Add dependabot configuration for GitHub Actions and Terraform.
+
 ## [0.1.62]() (2025-01-24)
 
 ### Features
@@ -27,4 +33,3 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 * Initial commit with all the code
-
