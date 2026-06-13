@@ -1,3 +1,5 @@
+> **ARCHIVED — read-only mirror.** This module is developed in [`c0x12c/terraform-modules`](https://github.com/c0x12c/terraform-modules) and published to `terraform.c0x12c.com`. This repository is a frozen mirror that only backs legacy `registry.terraform.io/c0x12c/<name>/<provider>` versions. Do not open issues or PRs here.
+
 # AWS Certificate Manager (ACM) Terraform module
 
 Terraform module which creates ACM certificates and validates them using Route53 DNS.
